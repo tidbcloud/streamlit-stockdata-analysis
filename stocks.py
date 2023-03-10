@@ -3,7 +3,7 @@ import yfinance as yf
 import pandas as pd
 import plotly.express as px
 from datetime import datetime, timedelta
-import MySQLdb
+import pymysql
 
 
 # Set up the Streamlit app
@@ -11,14 +11,15 @@ st.set_page_config(page_title="Historical Stock Data", page_icon="📈")
 
 def init_connection():
     config = st.secrets["tidb"]
-    return MySQLdb.connect(
+    return pymysql.connect(
         host=config["host"],
         port=config["port"],
         user=config["user"],
         password=config["password"],
         database=config["database"],
-        ssl_mode="VERIFY_IDENTITY",
-        ssl={"ca": config["ssl_ca"]}
+        ssl_verify_cert=True,
+        ssl_verify_identity=True,
+        ssl_ca= config["ssl_ca"]
     )
 
 conn = init_connection()

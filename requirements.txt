@@ -1,4 +1,4 @@
-mysqlclient==2.1.1
+PyMySQL==1.0.2
 plotly==5.13.1
 streamlit==1.19.0
 yfinance==0.2.12
