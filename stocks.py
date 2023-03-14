@@ -2,7 +2,6 @@ import streamlit as st
 import yfinance as yf
 import pandas as pd
 import plotly.express as px
-from datetime import datetime, timedelta
 import pymysql
 
 
@@ -31,7 +30,7 @@ def get_ticker_data(symbol, start_date, end_date):
     data = ticker.history(start=start_date, end=end_date)
     return data
 
-# Define function to fetch data from MySQL database
+# Define function to fetch data from TiDB database
 
 def fetch_data(symbol1, symbol2, start_date, end_date):
 
@@ -106,7 +105,7 @@ def app():
             col3.write(f"Total Rows: {len(data)}")
             st.session_state.data = data
 
-        # Define the button to save the data to MySQL
+        # Define the button to save the data to TiDB
         if col2.button("Save Data"):
             if st.session_state.get("data") is None:
                 st.write("No data to save.")
